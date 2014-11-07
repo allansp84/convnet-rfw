@@ -11,7 +11,7 @@ setup(
     install_requires=['numpy>=1.6.1',
                       'scipy>=0.10.0',
                       'numexpr>=2.0',
-                      'scikits-image>=0.5',
+                      'scikit-image>=0.5',
                       'nose>=1.3.0'],
     package_data={'': ['*.md']},
 )
