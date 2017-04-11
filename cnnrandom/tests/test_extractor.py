@@ -70,7 +70,6 @@ def test_random_images():
 
     feat_set.shape = n_imgs, -1
     test_chunk_computed = feat_set[3:9, 12798:12802]
-
     test_chunk_expected = np.array([
         [0.0211054,  0.03008464, 0.01754513, 0.02833426],
         [0.02208067, 0.00935635, 0.01337241, 0.01570413],
@@ -84,7 +83,7 @@ def test_random_images():
                     rtol=RTOL, atol=ATOL)
 
 
-def test_lena():
+def test_astronaut():
 
     from skimage import data
     from skimage import color
@@ -93,11 +92,12 @@ def test_lena():
     in_shape = (200, 200)
     n_imgs = 1
 
-    lena = resize(color.rgb2gray(data.lena()), in_shape).astype(np.float32)
-    lena -= lena.min()
-    lena /= lena.max()
+    astronaut = resize(color.rgb2gray(data.astronaut()), in_shape).astype(
+       np.float32)
+    astronaut -= astronaut.min()
+    astronaut /= astronaut.max()
 
-    imgs = lena.reshape((n_imgs,)+in_shape)
+    imgs = astronaut.reshape((n_imgs,)+in_shape)
 
     model = cnnr.models.fg11_ht_l3_1_description
     extractor = cnnr.BatchExtractor(in_shape, model)
@@ -110,7 +110,7 @@ def test_lena():
     test_chunk_computed = feat_set[0, 12798:12802]
 
     test_chunk_expected = np.array(
-        [0.03845372, 0.02469639, 0.01009409, 0.02500059], dtype=np.float32)
+        [0.028979, 0.03315, 0.024466, 0.009412], dtype=np.float32)
 
     assert_allclose(test_chunk_computed, test_chunk_expected,
                     rtol=RTOL, atol=ATOL)
